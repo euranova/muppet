@@ -9,7 +9,7 @@ authors = [
   { name = "Duc Thang Hoang", email = "ducthang.hoang@euranova.eu" }
 ]
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.10,<3.11"
 dependencies = [
     "numpy>=2.2.6",
     "scikit-image>=0.25.2",

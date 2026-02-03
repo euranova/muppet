@@ -32,6 +32,8 @@ explain_func_kwargs:
 
 dataset:
   test_size: 4
+  loader:
+    path: /tmp/imagenet_100
 
 hydra:
   launcher:

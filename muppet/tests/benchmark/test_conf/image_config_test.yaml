@@ -36,6 +36,8 @@ metrics:
 
 dataset:
   test_size: 4
+  loader:
+    path: /tmp/imagenet_100
 
 explain_func_kwargs:
   plot_explanation: true
