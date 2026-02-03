@@ -1,0 +1,35 @@
+__pycache__
+*.pyc
+/dist/
+/*.egg-info
+/build/
+.idea
+
+# Jupyter
+.ipynb_checkpoints
+
+*.tar.gz
+*.pdf
+*.dot
+
+.vscode/*
+.muppet_env/*
+./pytest_cache/*
+outputs/**
+multirun/**
+results/**
+
+
+# Ignore commonly used image files
+*.jpg
+*.JPEG
+*.png
+!docs/assets/Muppet_logo.png
+*.gif
+*.bmp
+*.tiff
+
+*.csv
+*.log
+
+*.joblib

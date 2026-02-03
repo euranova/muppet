@@ -1,0 +1,9 @@
+results/
+multirun/
+__pycache__
+*.pyc
+/dist/
+/*.egg-info
+/build/
+.idea
+

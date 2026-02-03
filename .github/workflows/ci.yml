@@ -1,0 +1,103 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6 # Updated to v6
+      - name: Install uv and python
+        uses: astral-sh/setup-uv@v7 # Updated to v7
+        with:
+          enable-cache: true
+      - name: Sync dependencies (Lint)
+        run: uv sync --group lint
+      - name: Run Ruff check
+        run: uv run ruff check .
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6 # Updated to v6
+      - name: Install uv and python
+        uses: astral-sh/setup-uv@v7 # Updated to v7
+        with:
+          enable-cache: true
+      - name: Sync dependencies (Test)
+        run: uv sync --group test
+      - name: Run Unit Tests
+        run: |
+          uv run coverage run --omit="config-3.py,config.py,*__init__*,muppet/tests/*,*/tmp/*" \
+          --data-file .coverage.unit \
+          --source muppet \
+          -m pytest muppet/tests/ --ignore muppet/tests/benchmark
+      - name: Upload coverage data
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-unit
+          path: .coverage.unit
+          include-hidden-files: true
+
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6 # Updated to v6
+      - name: Install uv and python
+        uses: astral-sh/setup-uv@v7 # Updated to v7
+        with:
+          enable-cache: true
+      - name: Sync dependencies (Test)
+        run: uv sync --group test
+      - name: Run Integration Tests
+        run: |
+          uv run coverage run --omit="config-3.py,config.py,*__init__*,muppet/tests/*,*/tmp/*" \
+          --data-file .coverage.integration \
+          --source muppet \
+          -m pytest muppet/tests/benchmark
+      - name: Upload coverage data
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-integration
+          path: .coverage.integration
+          include-hidden-files: true
+
+  coverage-merge:
+    name: Merge Coverage
+    needs: [unit-tests, integration-tests]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6 # Updated to v6
+      - name: Install uv and python
+        uses: astral-sh/setup-uv@v7 # Updated to v7
+      - name: Sync dependencies (Coverage)
+        run: uv sync --group test
+      - name: Download all coverage artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: coverage-data
+          pattern: coverage-*
+          merge-multiple: true
+      - name: Combine and Report
+        run: |
+          uv run coverage combine
+          uv run coverage report -m --fail-under=80
+          uv run coverage html
+          uv run coverage xml
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-coverage-report
+          path: htmlcov/
+      - name: Upload XML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml
