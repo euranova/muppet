@@ -1,0 +1,7 @@
+_target_: muppet.benchmark.models.classifier.Classifier
+name: GRU classifier
+pretrained: True
+model:
+    _target_: muppet.benchmark.models.classifier.GRUClassifier
+    pretrained_model_path: muppet/benchmark/models/spike_model.pt
+    feature_size: 3

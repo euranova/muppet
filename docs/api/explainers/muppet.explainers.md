@@ -1,0 +1,17 @@
+Muppet-XAI is a multimodal python library for explaining and interpreting Pytorch models through perturbation-based XAI methods. It Supports all data modalities (including images, tabular data, time series, ...).
+
+## Modules
+
+| Name                                   | Description                                      |
+|----------------------------------------|--------------------------------------------------|
+| [`muppet.explainers.base`](muppet.explainers.base.md) | This module provides the fundamental `MuppetExplainer` class that serves as the foundation for all explainable AI (XAI) methods in the MUPPET library. |
+| [`muppet.explainers.fit`](muppet.explainers.fit.md) | This module implements the Instance-wise Feature Importance in Time (FIT) method for explaining time series classification models. |
+| [`muppet.explainers.lime`](muppet.explainers.lime.md) | This module implements Local Interpretable Model-Agnostic Explanations (LIME) for both image and tabular data. |
+| [`muppet.explainers.mp`](muppet.explainers.mp.md) | This module implements the Meaningful Perturbation method for generating interpretable explanations of black-box models through optimized mask learning. |
+| [`muppet.explainers.opti_cam`](muppet.explainers.opti_cam.md) | This module implements Opti-CAM, a method that optimizes Class Activation Mapping (CAM) by learning the optimal linear combination of feature maps from the last convolutional layer. |
+| [`muppet.explainers.relax`](muppet.explainers.relax.md) | This module implements the RELAX explainer, a perturbation-based XAI method that generates explanations by analyzing how random perturbations affect the model's internal representations or embeddings. |
+| [`muppet.explainers.rise`](muppet.explainers.rise.md) | This module implements RISE, a model-agnostic explanation method that generates importance maps by probing the model with randomly masked versions of the input. |
+| [`muppet.explainers.rise_ts`](muppet.explainers.rise_ts.md) | This module implements time series adaptations of the RISE (Randomized Input Sampling for Explanation) method. While the original RISE was designed for image data, these variants extend the approach to handle multivariate time series by adapting the masking strategy and perturbation methods to respect the temporal structure of the data. |
+| [`muppet.explainers.segrise`](muppet.explainers.segrise.md) | This module implements SegRISE, an adaptation of the RISE (Randomized Input Sampling for Explanation) method specifically designed for semantic segmentation tasks. Unlike the original RISE which was developed for classification and uses class probabilities as weights, SegRISE uses the Dice similarity coefficient to measure the overlap between original and perturbed segmentation outputs. |
+| [`muppet.explainers.score_cam`](muppet.explainers.score_cam.md) | This module implements Score-CAM, a gradient-free method for generating class activation maps that overcomes limitations of gradient-based CAM approaches. Instead of using gradients to weight feature maps, Score-CAM evaluates the contribution of each activation map by using it as a mask and measuring the resulting change in the model's confidence. |
+| [`muppet.explainers.shap`](muppet.explainers.shap.md) | This module implements SHAP, a game-theory based approach to explain machine learning model predictions. SHAP assigns each feature an importance value (Shapley value) that represents its contribution to the difference between the current prediction and the average prediction across the dataset. |

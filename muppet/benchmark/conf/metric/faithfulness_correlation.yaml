@@ -1,0 +1,2 @@
+_target_: quantus.FaithfulnessCorrelation
+return_aggregate: False

@@ -1,0 +1,77 @@
+defaults:
+  - model: gru_classif
+  - dataset: spike
+
+  - explainer@explainers.FITExplainer: timeseries/fit
+  - explainer@explainers.RISE_high_proba: timeseries/rise
+  - explainer@explainers.RISE_high_proba_fine_grid: timeseries/rise
+  - explainer@explainers.RISE_low_proba: timeseries/rise
+  - explainer@explainers.RISE_low_proba_fine_grid: timeseries/rise
+
+  # Load some metrics from dedicated configuration into `cfg.metrics`
+  # - metric@metrics.relative_input_stability: relative_input_stability
+  # - metric@metrics.sufficiency: sufficiency
+  # - metric@metrics.complexity: complexity
+  - metric@metrics.faithfulness_correlation: faithfulness_correlation
+  # - metric@metrics.monotonicity: monotonicity
+  - metric@metrics.sparseness: sparseness
+  # - metric@metrics.randomlogit: randomlogit
+
+  - hydra/callbacks:
+    - experiences_summary
+  # Using joblib for multirun
+  - override hydra/launcher: joblib
+
+  - _self_            # Allows defining other parameters directly in this file
+
+explain_func_kwargs:
+  plot_explanation: true
+  num_plot_explanations: 5
+
+# --- Define user-specific metrics which override every single metric defined in `defaults` list above ---
+metrics:
+  faithfulness_correlation:
+    # subset_size must be smaller than input size (i.e. 80 in case of spike dataset)
+    subset_size: 60
+  # randomlogit:
+  #   num_classes: 7 # number of classes for dry_beans dataset
+  #   similarity_func: quantus.functions.similarity_func.cosine
+
+
+explainers:
+  FITExplainer:
+    num_sampling: 10
+    num_epochs: 20
+
+  RISE_high_proba:
+    nb_series: 3
+    nmasks: 500
+    mask_dim: 10
+    mask_proba: 0.5
+
+  RISE_high_proba_fine_grid:
+    nb_series: 3
+    nmasks: 500
+    mask_dim: 3
+    mask_proba: 0.5
+
+  RISE_low_proba:
+    nb_series: 3
+    nmasks: 500
+    mask_dim: 10
+    mask_proba: 0.1
+
+  RISE_low_proba_fine_grid:
+    nb_series: 3
+    nmasks: 500
+    mask_dim: 3
+    mask_proba: 0.1
+
+hydra:
+  launcher:
+    # override the number of jobs for joblib
+    n_jobs: 6
+  mode: MULTIRUN
+  sweeper:
+    params:
+      +run_explainer: FITExplainer,RISE_high_proba,RISE_high_proba_fine_grid,RISE_low_proba,RISE_low_proba_fine_grid

@@ -1,0 +1,68 @@
+defaults:
+  - model: rf
+  - dataset: tabular_dataset
+
+  # Select the explainers to evaluate, they can be overrided in the section below
+  - explainer@explainers.LIME LASSO CV: tabular/lime
+  - explainer@explainers.SHAP Ridge CV: tabular/shap
+
+  # Load some metrics from dedicated configuration into `cfg.metrics`
+  - metric@metrics.complexity: complexity
+  - metric@metrics.faithfulness_estimate: faithfulness_estimate
+  - metric@metrics.monotonicity: monotonicity
+  - metric@metrics.sparseness: sparseness
+  - metric@metrics.randomlogit: randomlogit
+
+  - hydra/callbacks:
+    - experiences_summary
+  # Using joblib for multirun
+  - override hydra/launcher: joblib
+
+  - _self_         # Allows defining other parameters directly in this file
+
+model:
+  n_trials: 5
+
+dataset:
+  name: dry_beans
+  loader:
+    dataset_param: 602
+    target_column: Class
+    source: uciml
+  test_size: 5
+  train_size: 100
+
+explain_func_kwargs:
+  plot_explanation: true
+  num_plot_explanations: 5
+
+# --- Define user-specific metrics which override every single metric defined in `defaults` list above ---
+metrics:
+  monotonicity:
+    features_in_step: 1
+    perturb_func: muppet.benchmark.metrics.perturb_func.multiplicative_noise
+  randomlogit:
+    num_classes: 7 # number of classes for dry_beans dataset
+    similarity_func: quantus.functions.similarity_func.cosine
+  faithfulness_estimate:
+    perturb_func: muppet.benchmark.metrics.perturb_func.multiplicative_noise
+
+
+# --- define precise list of non default option for explainers
+explainers:
+  LIME LASSO CV:
+    surrogate_model:
+      _target_: sklearn.linear_model.LassoCV
+
+  SHAP Ridge CV:
+    surrogate_model:
+      _target_: sklearn.linear_model.RidgeCV
+
+
+hydra:
+  launcher:
+    # override the number of jobs for joblib
+    n_jobs: 2
+  sweeper:
+    params:
+      +run_explainer: LIME LASSO CV,SHAP Ridge CV

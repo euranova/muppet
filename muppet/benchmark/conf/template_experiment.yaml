@@ -1,0 +1,53 @@
+defaults:
+  - model: timeseries/aeon_classification_model
+  - dataset: tsc
+
+  - explainer@explainers.Name of the first explainer in the results: {modality}/{name_of_the_first_explainer} # the name should be the name of explainer config file
+  - explainer@explainers.Name of the second explainer in the results: {modality}/{name_of_the_second_explainer}
+
+  # List of metrics to use from dedicated configuration into `cfg.metrics`
+  - metric@metrics.faithfulness_correlation: faithfulness_correlation
+  - metric@metrics.sparseness: sparseness
+
+  # allows to trigger the summary plotting callbacks list in hydra/callbacks folder
+  - hydra/callbacks:
+    - experiences_summary
+
+  # Using joblib for multirun
+  - override hydra/launcher: joblib
+
+  - _self_            # Allows defining other parameters directly in this file
+
+dataset:
+  name: EthanolConcentration
+  loader:
+    name: EthanolConcentration
+  test_size: 10
+
+
+# --- Define user-specific metrics which override every single metric defined in `defaults` list above ---
+# metrics:
+  # monotonicity:
+  #   features_in_step: 1
+  # randomlogit:
+  #   num_classes: 7 # number of classes for dry_beans dataset
+  #   similarity_func: quantus.functions.similarity_func.cosine
+
+explain_func_kwargs:
+  plot_explanation: true
+  num_heatmaps: 5
+
+explainers: # Optionnal override of the default parameters for the explainers
+  Name of the second explainer in the results:
+    nmasks: 500
+
+
+# Optionnal use of the a parallel runs for the experiment, arallelize over the explainers.
+# hydra:
+#   launcher:
+#     # override the number of jobs for joblib
+#     n_jobs: 6
+#   mode: MULTIRUN
+#   sweeper:
+#     params:
+#       +run_explainer: Name of the first explainer in the results,Name of the second explainer in the results

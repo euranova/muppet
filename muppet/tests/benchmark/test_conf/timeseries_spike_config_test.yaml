@@ -1,0 +1,50 @@
+defaults:
+  - model: gru_classif
+  - dataset: spike
+
+  - explainer@explainers.FITExplainer: timeseries/fit
+  - explainer@explainers.RISE_high_proba: timeseries/rise
+
+  # Load some metrics from dedicated configuration into `cfg.metrics`
+  - metric@metrics.faithfulness_correlation: faithfulness_correlation
+  - metric@metrics.sparseness: sparseness
+
+  - hydra/callbacks:
+    - experiences_summary
+  # Using joblib for multirun
+  - override hydra/launcher: joblib
+
+  - _self_            # Allows defining other parameters directly in this file
+
+dataset:
+  test_size: 2
+  train_size: 10
+
+# --- Define user-specific metrics which override every single metric defined in `defaults` list above ---
+metrics:
+  faithfulness_correlation:
+    subset_size: 10
+
+explain_func_kwargs:
+  plot_explanation: true
+  num_heatmaps: 5
+
+explainers:
+  FITExplainer:
+    num_sampling: 3
+    num_epochs: 2
+    padding: right
+
+  RISE_high_proba:
+    nb_series: 4
+    nmasks: 10
+    mask_dim: 10
+    mask_proba: 0.5
+
+hydra:
+  launcher:
+    # override the number of jobs for joblib
+    n_jobs: 2
+  sweeper:
+    params:
+      +run_explainer: FITExplainer,RISE_high_proba

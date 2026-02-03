@@ -1,0 +1,16 @@
+_target_: muppet.benchmark.datasets.datamodule.DataModule
+type: timeseries
+loader:
+  _func_: aeon.datasets.load_classification
+  name: ???
+name: ???
+test_size: ??? # number of samples in test dataset used to perform explanation
+train_size: null 
+transform:
+  # _target_: sklearn.compose.ColumnTransformer
+  # transformers:
+dataloader_kwargs:
+  batch_size: 10
+  num_workers: 4
+  multiprocessing_context: fork
+

@@ -1,0 +1,2 @@
+experiences_summary:
+  _target_: muppet.benchmark.plot_exp_result_callback.PlotExperiencesResultCallback

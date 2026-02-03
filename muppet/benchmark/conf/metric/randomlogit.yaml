@@ -1,0 +1,3 @@
+_target_: quantus.RandomLogit
+num_classes: 1000
+similarity_func: quantus.functions.similarity_func.ssim

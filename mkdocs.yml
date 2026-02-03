@@ -1,0 +1,141 @@
+# Project information
+site_name: Muppet-XAI
+site_url: https://code.euranova.eu/rd/taudos/muppet # 👈 UPDATE THIS
+repo_url: https://code.euranova.eu/rd/taudos/muppet
+site_description: "Perturbation-based framework for understanding and interpreting Pytorch models."
+site_author: "Antoine Bonnefoy, Duc Thang Hoang"
+
+# Theme configuration
+theme:
+  name: material
+  logo: assets/Muppet_logo.png # Optional: add a logo
+  favicon: assets/Muppet_logo_white.png # Optional: add a favicon
+  palette:
+    # Palette toggle for light vs dark mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  language: en
+  font:
+    text: Inter
+    code: Inter Regular
+  features:
+    - navigation.path
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.sections
+    - navigation.indexes
+    - navigation.tracking
+    - toc.follow
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+    - content.code.annotate
+    - content.code.highlight
+
+# Extensions for markdown
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# Page navigation
+nav:
+  - Home: index.md
+  - User Guide:
+    - Installation: installation.md
+    - Getting Started: getting_started.md
+    - Benchmarking: benchmarking.md
+  - API Reference:
+    - Overview: api/index.md
+    - Explainers:
+      - Overview: api/explainers/muppet.explainers.md
+      - Base Explainer Logic: api/explainers/muppet.explainers.base.md
+      - Implemented explainers:
+        - fit: api/explainers/muppet.explainers.fit.md
+        - lime: api/explainers/muppet.explainers.lime.md
+        - mp: api/explainers/muppet.explainers.mp.md
+        - opti_cam: api/explainers/muppet.explainers.opti_cam.md
+        - relax: api/explainers/muppet.explainers.relax.md
+        - rise: api/explainers/muppet.explainers.rise.md
+        - rise_ts: api/explainers/muppet.explainers.rise_ts.md
+        - segrise: api/explainers/muppet.explainers.segrise.md
+        - score_cam: api/explainers/muppet.explainers.score_cam.md
+        - shap: api/explainers/muppet.explainers.shap.md
+    - Components:
+      - Overview: api/components/muppet.components.md
+      - Aggregator: api/components/muppet.components.aggregator.md
+      - Attributor: api/components/muppet.components.attributor.md
+      - Explorer: api/components/muppet.components.explorer.md
+      - Memory: api/components/muppet.components.memory.md
+      - Perturbator:
+        - pertubators: api/components/muppet.components.perturbator.md
+        - generators: api/components/muppet.components.perturbator.generator.md
+    - Benchmark:
+      - Overview: api/benchmark/muppet.benchmark.md
+      - Datamodule: api/benchmark/muppet.benchmark.datamodule.md
+      - Models: api/benchmark/muppet.benchmark.models.md
+  - Contributing: dev_documentation.md
+
+# Plugins
+plugins:
+  - search
+  - autorefs
+  - mermaid2
+  - mkdocstrings:
+      handlers:
+        python:
+          # Path to the directory containing your python package
+          paths: [.]
+          options:
+            # --- General Options ---
+            show_root_toc_entry: true
+            show_root_heading: true
+            show_source: false
+            members_order: source
+
+            # --- TOC and Heading Options ---
+            heading_level: 3  # Use H3 for module titles for better hierarchy
+            show_submodules: true # Explicitly render submodules
+
+            # --- Filtering Options ---
+            # Remove restrictive filters to allow automatic discovery of all public
+            # classes and functions. Only filter out private members.
+            filters:
+              - "!^_"
+
+            # --- Docstring Style Options ---
+            docstring_style: google
+            merge_init_into_class: true
+            docstring_section_style: list
+            separate_signature: true
+            show_category_heading: true
+
+            # --- Quality Control ---
+            # Warn about parameters in docstrings that don't exist in the signature.
+            # Helps keep documentation accurate.
+            docstring_options:
+              warn_unknown_params: true

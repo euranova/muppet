@@ -1,0 +1,17 @@
+_target_: muppet.benchmark.datasets.datamodule.DataModule
+name: ???
+type: tabular
+loader:
+  _func_: muppet.benchmark.datasets.loader.load_tabular_dataset
+  dataset_param: ???
+  target_column: ???
+  source: ??? # possible sources: uciml, openml, or file. Check DataModule docs for more details.
+test_size: ??? # number of samples in test dataset used to perform explanation
+train_size: null
+transform:
+  # _target_: sklearn.compose.ColumnTransformer
+  # transformers:
+dataloader_kwargs:
+  batch_size: 256
+  num_workers: 4
+  multiprocessing_context: fork

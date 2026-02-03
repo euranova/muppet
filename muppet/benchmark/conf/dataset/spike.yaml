@@ -1,0 +1,14 @@
+_target_: muppet.benchmark.datasets.datamodule.DataModule
+name: synth spike
+type: timeseries
+loader:
+  _func_: muppet.benchmark.datasets.loader.load_pickle_dataset
+  folder_path: muppet/benchmark/datasets/timeseries/synthetic/spike/
+test_size: 300 # number of samples in test dataset used to perform explanation
+train_size: null
+transform:
+dataloader_kwargs:
+  batch_size: 32
+  num_workers: 4
+  multiprocessing_context: fork
+

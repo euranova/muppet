@@ -1,0 +1,25 @@
+_target_: muppet.benchmark.datasets.datamodule.DataModule
+name: imagenet
+type: image
+loader:
+  _func_: muppet.benchmark.datasets.loader.download_imagenet
+  path: /home/user/muppet/muppet/benchmark/datasets/image/imagenet_100
+  num_images: 300
+  image_size: [224, 224]
+test_size: 300 # number of samples in test dataset used to perform explanation
+train_size: null
+transform:
+  _target_: torchvision.transforms.Compose
+  transforms:
+    - _target_: torchvision.transforms.Resize
+      size: [224, 224]
+    - _target_: torchvision.transforms.ToTensor
+    - _target_: torchvision.transforms.Normalize
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+dataloader_kwargs:
+  batch_size: 32
+  num_workers: 4
+  multiprocessing_context: fork
+labels_mapping:
+  _target_: muppet.benchmark.datasets.loader.load_imagenet_labels

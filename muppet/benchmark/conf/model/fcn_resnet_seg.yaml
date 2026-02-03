@@ -1,0 +1,18 @@
+_target_: muppet.benchmark.models.segmentation.SegmentationModel
+name: fcn_resnet50_coco
+model:
+    # load from torchvision
+    _target_: torchvision.models.segmentation.fcn_resnet50
+    name: fcn_resnet50_coco
+    weights: DEFAULT
+
+    # example of loading from torch.hub
+    # _func_: torch.hub.load
+    # repo_or_dir: pytorch/vision
+    # model: resnet18
+    # weights: IMAGENET1K_V1
+
+    # example of loading from local file
+    # _func_: torch.load
+    # f: resnet18.pt
+pretrained: True

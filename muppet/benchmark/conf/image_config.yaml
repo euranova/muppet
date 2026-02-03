@@ -1,0 +1,54 @@
+defaults:
+  - model: resnet
+  - dataset: imagenet
+
+  - explainer@explainers.MPExplainer: image/mp
+  - explainer@explainers.RISEExplainer: image/rise
+  - explainer@explainers.LIMEImageExplainer: image/limeimage
+  - explainer@explainers.OptiCAMExplainer: image/opticam
+  - explainer@explainers.ScoreCAMExplainer: image/scorecam
+
+  # Load some metrics from dedicated configuration into `cfg.metrics`
+  - metric@metrics.faithfulness_correlation: faithfulness_correlation
+  - metric@metrics.monotonicity: monotonicity
+  - metric@metrics.irof: irof
+  - metric@metrics.sparseness: sparseness
+  - metric@metrics.randomlogit: randomlogit
+
+  - hydra/callbacks:
+    - experiences_summary
+  # Using joblib for multirun
+  - override hydra/launcher: joblib
+
+  - _self_            # Allows defining other parameters directly in this file
+
+# --- Define user-specific metrics which override every single metric defined in `defaults` list above ---
+metrics:
+  # If any argument of one metric needs to be overwritten, define that argument in these lines below
+  # Never make a metric here None (Null) because hydra will overwrite the default config by None metric
+  faithfulness_correlation:
+    return_aggregate: False
+  monotonicity:
+    features_in_step: 3136
+  irof:
+    perturb_baseline: mean
+    return_aggregate: False
+  # sparseness:
+  randomlogit:
+    num_classes: 1000
+
+dataset:
+  test_size: 100
+
+explain_func_kwargs:
+  plot_explanation: true
+  num_plot_explanations: 5
+
+hydra:
+  launcher:
+    # override the number of jobs for joblib
+    n_jobs: 5
+  # mode: MULTIRUN # TODO memory problem with the mulrirun on images. line 31 of run_benchmark
+  sweeper:
+    params:
+      +run_explainer: MPExplainer,RISEExplainer,LIMEImageExplainer,OptiCAMExplainer,ScoreCAMExplainer

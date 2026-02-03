@@ -1,0 +1,22 @@
+_target_: muppet.benchmark.models.classifier.Classifier
+model:
+    _target_: aeon.classification.convolution_based.HydraClassifier
+pretrained: False
+name: Time series Classification model
+random_state: 105
+n_trials: 5
+cv: 3
+scoring: balanced_accuracy
+predict_proba_func: predict_proba #predict_log_proba
+n_jobs: 3
+params_tuning:
+    n_kernels:
+        _target_: optuna.distributions.IntDistribution
+        low: 2
+        high: 8
+        log: true
+    n_groups:
+        _target_: optuna.distributions.IntDistribution
+        low: 2
+        high: 8
+        log: true

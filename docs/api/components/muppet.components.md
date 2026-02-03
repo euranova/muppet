@@ -1,0 +1,11 @@
+Muppet-XAI is a multimodal python library for explaining and interpreting Pytorch models through perturbation-based XAI methods. It Supports all data modalities (including images, tabular data, time series, ...).
+
+## Modules
+
+| Name                                   | Description                                      |
+|----------------------------------------|--------------------------------------------------|
+| [`muppet.components.aggregator`](muppet.components.aggregator.md) | Provides the implementation of all aggregators in the MUPPET XAI framework. Aggregators are responsible for combining individual feature attributions calculated by attributors to produce the final local explanations (heatmaps, feature importance scores, etc.). |
+| [`muppet.components.attributor`](muppet.components.attributor.md) | Provides the implementation of all attributors in the MUPPET XAI framework. Attributors are responsible for calculating attribution scores from model predictions on perturbed inputs. These attributions quantify how much each perturbation affects the model's output and serve as the basis for feature importance calculations. |
+| [`muppet.components.explorer`](muppet.components.explorer.md) | Provides the implementation of all explorers in the MUPPET XAI framework. Explorers are responsible for generating masks and exploration strategies that define how input data will be systematically perturbed to understand model behavior. |
+| [`muppet.components.memory`](muppet.components.memory.md) | Provides the implementation of all memories in the MUPPET XAI framework. The memory components are responsible for storing and managing premises throughout the explanation process, where premises represent perturbation data including masks, keys, and attribution results. |
+| [`muppet.components.perturbator`](muppet.components.perturbator.md) | Provides the implementation of all perturbators in the MUPPET XAI framework. Perturbators take the original input data and binary masks from explorers, then create perturbed versions of the input by modifying specific regions according to the masks. The perturbation strategy depends on the data modality and explanation method requirements. |

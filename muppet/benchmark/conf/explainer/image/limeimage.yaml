@@ -1,0 +1,4 @@
+_target_: muppet.explainers.lime.LIMEImageExplainer
+n_segments: 100
+nmasks: 100
+masked_proba: 0.5

@@ -1,0 +1,30 @@
+_target_: muppet.benchmark.models.classifier.Classifier
+name: xgboost
+model:
+    _target_: xgboost.XGBClassifier
+    objective: multi:softprob
+    eval_metric: mlogloss
+pretrained: False
+random_state: 105
+n_trials: 20
+cv: 5
+scoring: balanced_accuracy
+predict_proba_func: predict_proba #predict_log_proba
+params_tuning:
+    n_estimators:
+        _target_: optuna.distributions.IntDistribution
+        low: 10
+        high: 100
+        step: 10
+    max_depth:
+        _target_: optuna.distributions.IntDistribution
+        low: 3
+        high: 10
+    min_samples_split:
+        _target_: optuna.distributions.IntDistribution
+        low: 2
+        high: 20
+    min_samples_leaf:
+        _target_: optuna.distributions.IntDistribution
+        low: 1
+        high: 10

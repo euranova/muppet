@@ -1,0 +1,55 @@
+defaults:
+  - model: timeseries/aeon_classification_model
+  - dataset: tsc
+
+  - explainer@explainers.RISE_high_proba: timeseries/rise
+  - explainer@explainers.RISE_generator: timeseries/rise
+
+  # Load some metrics from dedicated configuration into `cfg.metrics`
+  - metric@metrics.faithfulness_correlation: faithfulness_correlation
+  - metric@metrics.sparseness: sparseness
+
+  - hydra/callbacks:
+    - experiences_summary
+  # Using joblib for multirun
+  - override hydra/launcher: joblib
+
+  - _self_            # Allows defining other parameters directly in this file
+
+dataset:
+  name: SmoothSubspace
+  loader:
+    name: SmoothSubspace
+  test_size: 2
+
+# --- Define user-specific metrics which override every single metric defined in `defaults` list above ---
+metrics:
+  faithfulness_correlation:
+    subset_size: 10
+
+explain_func_kwargs:
+  plot_explanation: true
+  num_heatmaps: 5
+
+explainers:
+  RISE_high_proba:
+    nb_series: 1
+    nmasks: 10
+    mask_dim: 10
+    mask_proba: 0.5
+
+  RISE_generator:
+    _target_: muppet.explainers.RISETimeseriesGenerativePerturbationExplainer
+    nb_series: 1
+    nmasks: 10
+    mask_dim: 10
+    mask_proba: 0.5
+
+
+hydra:
+  launcher:
+    # override the number of jobs for joblib
+    n_jobs: 2
+  sweeper:
+    params:
+      +run_explainer: FITExplainer,RISE_high_proba,RISE_generator

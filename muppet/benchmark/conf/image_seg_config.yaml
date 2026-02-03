@@ -1,0 +1,39 @@
+defaults:
+  - model: fcn_resnet_seg
+  - dataset: imagenet
+
+  - explainer@explainers.SegRISEExplainer: image/segrise
+  - explainer@explainers.SegRISEExplainer_blur: image/segrise
+
+
+  # Load some metrics from dedicated configuration into `cfg.metrics`
+  - metric@metrics.faithfulness_correlation_seg: faithfulness_correlation_seg
+
+  - hydra/callbacks:
+    - experiences_summary
+  # Using joblib for multirun
+  - override hydra/launcher: joblib
+
+  - _self_            # Allows defining other parameters directly in this file
+
+# --- Define user-specific metrics which override every single metric defined in `defaults` list above ---
+metrics:
+  faithfulness_correlation_seg:
+    return_aggregate: False
+
+dataset:
+  test_size: 5
+
+explain_func_kwargs:
+  plot_explanation: true
+  num_plot_explanations: 5
+
+hydra:
+  launcher:
+    # override the number of jobs for joblib
+    n_jobs: 5
+  # mode: MULTIRUN # TODO memory problem wiht the mulrirun on images. line 31 of run_benchmark
+  sweeper:
+    params:
+      +run_explainer: SegRISEExplainer,SegRISEExplainer_blur
+

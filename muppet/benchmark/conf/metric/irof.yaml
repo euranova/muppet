@@ -1,0 +1,5 @@
+_target_: quantus.IROF
+segmentation_method: slic
+perturb_baseline: mean
+return_aggregate: False
+perturb_func: quantus.functions.perturb_func.baseline_replacement_by_indices

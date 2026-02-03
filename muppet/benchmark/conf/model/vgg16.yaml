@@ -1,0 +1,11 @@
+_target_: muppet.benchmark.models.classifier.Classifier
+name: vgg16
+model:
+    # load from torchvision
+    _target_: torchvision.models.get_model
+    name: vgg16
+    weights: IMAGENET1K_V1
+
+pretrained: True
+random_state: 167
+
