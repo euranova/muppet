@@ -101,3 +101,33 @@ jobs:
         with:
           name: coverage-xml
           path: coverage.xml
+
+  deploy-docs:
+    name: Deploy Documentation
+    # Only deploy on the main branch and if tests passed
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    needs: [lint, unit-tests, integration-tests]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # REQUIRED to push to the gh-pages branch
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv and python
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Sync dependencies (Docs)
+        # Installs the 'docs' group (mkdocs, mkdocs-material, etc.)
+        run: uv sync --group docs
+
+      - name: Configure Git User
+        # MkDocs needs a git identity to commit the gh-pages branch
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Deploy to GitHub Pages
+        # uv run ensures we use the installed mkdocs version
+        run: uv run mkdocs gh-deploy --force
