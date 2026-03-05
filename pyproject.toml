@@ -39,7 +39,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://code.euranova.eu/rd/taudos/muppet"
+Homepage = "https://euranova.github.io/muppet"
 
 [project.scripts]
 muppet-benchmark = "muppet.benchmark.run_benchmark:main"
