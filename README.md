@@ -205,6 +205,8 @@ For support please write to :
 
 - Antoine Bonnefoy - antoine.bonnefoy@euranova.eu
 
+- Ismail Bachchar - isbachchar@gmail.com
+
 - Duc Thang Hoang - ducthang.hoang@euranova.eu
 
 # 📝 Citations
@@ -218,3 +220,11 @@ If you find MUPPET-XAI useful in your research or projects, please cite our work
   year={2025}
 }
 ```
+
+# 📜 License
+
+Muppet offers two licensing options to suit different needs:
+
+- **AGPLv3.0 License**: The [GPLv3](https://www.gnu.org/licenses/agpl-3.0.txt) license is suited for students, researchers, and enthusiasts. It encourages open collaboration and knowledge sharing. See the [LICENSE](LICENSE) file for details.
+
+- **Commercial license**: On demand for commercial use, the licensing allows the use of this code in commercial products and services, bypassing the open-source requirements of AGPLv3.

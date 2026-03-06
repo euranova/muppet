@@ -1,15 +1,12 @@
 [project]
 name = "Muppet-XAI"
-version = "0.1.3"
+version = "0.1.4"
 description = "Perturbation-based framework for understanding and interpreting Pytorch models"
 authors = [
-  { name = "Quentin Ferré", email = "quentin.q.ferre@gmail.com" },
-  { name = "Antoine Bonnefoy", email = "antoine.bonnefoy@euranova.eu" },
-  { name = "Ismail Bachchar", email = "isbachchar@gmail.com" },
-  { name = "Duc Thang Hoang", email = "ducthang.hoang@euranova.eu" }
+  { name = "Euranova", email = "research@euranova.eu" }
 ]
 readme = "README.md"
-requires-python = ">=3.10,<3.11"
+requires-python = ">=3.10"
 dependencies = [
     "numpy>=2.2.6",
     "scikit-image>=0.25.2",
@@ -38,8 +35,16 @@ dependencies = [
     "xgboost>=3.0.2",
 ]
 
+license = {text = "GNU Affero General Public License"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3.10",
+]
+
 [project.urls]
 Homepage = "https://euranova.github.io/muppet"
+Source = "https://github.com/euranova/muppet"
+Documentation = "https://euranova.github.io/muppet"
 
 [project.scripts]
 muppet-benchmark = "muppet.benchmark.run_benchmark:main"
