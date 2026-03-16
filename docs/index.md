@@ -45,18 +45,16 @@ pip install muppet-xai
 
 **Citation**
 
-If you find this toolkit or its companion paper [Paper-Name](paper-link) interesting or useful in your research, please use the following Bibtex annotation to cite us:
+If you find this toolkit or its companion paper [Muppet: A Modular and Constructive Decomposition for Perturbation-Based Explanation Methods](https://ieeexplore.ieee.org/abstract/document/11228092) interesting or useful in your research, please use the following Bibtex annotation to cite us:
 
 ```bibtex
-@article{hedstrom2025muppet,
-  author  = {},
-  title   = {Muppet: a modular and constructive decomposition for perturbation-based explanation methods},
-  journal = {},
-  year    = {2025},
-  volume  = {24},
-  number  = {34},
-  pages   = {1--11},
-  url     = {}
+@inproceedings{ferre2025muppet,
+  title={Muppet: A Modular and Constructive Decomposition for Perturbation-Based Explanation Methods},
+  author={Ferré, Quentin and Bachchar, Ismail and Arroubat, Hakima and Jedidi, Aziz and Achenchabe, Youssef and Bonnefoy, Antoine},
+  booktitle={2025 International Joint Conference on Neural Networks (IJCNN)},
+  pages={1--8},
+  year={2025},
+  organization={IEEE}
 }
 ```
 

@@ -4,12 +4,12 @@
 # -> This stage is used for all GitLab CI and GitHub Actions jobs.
 # -> Build with: docker build -t muppet/muppet:latest .
 # =====================================================================
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update --fix-missing \
     &&   apt-get install -y  \
-    python3.10 python3-pip python3.10-dev \
+    python3.12 python3-pip python3.12-dev \
     unzip \
     wget \
     libgtk2.0-dev \
@@ -25,7 +25,6 @@ RUN apt-get update --fix-missing \
     libxext6 \
     libxrender-dev \
     libglib2.0-0 \
-    libgl1-mesa-glx \
     xvfb \
     libgdal-dev \
     libhdf5-dev \
@@ -36,7 +35,7 @@ RUN apt-get update --fix-missing \
     rm -rf /var/lib/apt/lists/*
 
 # Download the latest installer
-ADD https://astral.sh/uv/0.7.10/install.sh /uv-installer.sh
+ADD https://astral.sh/uv/0.9.30/install.sh /uv-installer.sh
 
 # Run the installer then remove it
 RUN sh /uv-installer.sh && rm /uv-installer.sh

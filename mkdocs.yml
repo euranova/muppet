@@ -1,7 +1,7 @@
 # Project information
 site_name: Muppet-XAI
-site_url: https://code.euranova.eu/rd/taudos/muppet # 👈 UPDATE THIS
-repo_url: https://code.euranova.eu/rd/taudos/muppet
+site_url: https://euranova.github.io/muppet
+repo_url: https://github.com/euranova/muppet
 site_description: "Perturbation-based framework for understanding and interpreting Pytorch models."
 site_author: "Antoine Bonnefoy, Duc Thang Hoang"
 

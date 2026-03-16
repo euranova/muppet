@@ -4,7 +4,7 @@
 #    NVIDIA GPU and the required drivers installed.
 # -> Build with: `docker build --target cuda -t muppet/muppet:cuda .`
 # =====================================================================
-FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
+FROM nvidia/cuda:12.8.0-cudnn-devel-ubuntu24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update --fix-missing \
@@ -24,7 +24,6 @@ RUN apt-get update --fix-missing \
     libxext6 \
     libxrender-dev \
     libglib2.0-0 \
-    libgl1-mesa-glx \
     xvfb \
     libgdal-dev \
     libhdf5-dev \
@@ -35,7 +34,7 @@ RUN apt-get update --fix-missing \
     rm -rf /var/lib/apt/lists/*
 
 # Download the latest installer
-ADD https://astral.sh/uv/0.7.10/install.sh /uv-installer.sh
+ADD https://astral.sh/uv/0.9.30/install.sh /uv-installer.sh
 
 # Run the installer then remove it
 RUN sh /uv-installer.sh && rm /uv-installer.sh

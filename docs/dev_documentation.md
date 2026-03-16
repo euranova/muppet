@@ -1,7 +1,5 @@
 Thank you for taking interest in contributions to **MUPPET-XAI**! We encourage you to contribute new explainers, new components, refactorings or report any bugs you may come across. In this guide, you will get an overview of the workflow and best practices for contributing to **MUPPET-XAI**.
 
-Questions. If you have any developer-related questions, please open an issue or write us at [antoine.bonnefoy@euranova.eu](antoine.bonnefoy@euranova.eu).
-
 ## Reporting Bugs
 
 If you discover a bug, as a first step please check the existing Issues to see if this bug has already been reported. In case the bug has not been reported yet, please do the following:
@@ -21,11 +19,6 @@ This is a general guide to contributing changes to **MUPPET-XAI**. If you would 
 ### Development Installation
 
 Make sure to install the latest version of **MUPPET-XAI** from the main branch.
-
-```bash
-git clone git@code.euranova.eu:rd/taudos/muppet.git
-cd muppet/
-```
 
 MUPPET supports both standard and containerized environments for streamlined setup. Follow the instructions below depending on your preference.
 
@@ -156,4 +149,4 @@ TODO
 
 ## Questions
 
-If you have any developer-related questions, please open an issue or write us at xxx@euranova.eu.
+For any developer-related questions, please [open an issue](https://github.com/euranova/muppet/issues/new/choose).
