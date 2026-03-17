@@ -1,6 +1,6 @@
 <div align="center">
 
-<img alt="Lightning" src="docs/assets/Muppet_logo.png" width="800px" style="max-width: 100%;">
+<img alt="Muppet" src="docs/assets/Muppet_logo.png" width="800px" style="max-width: 100%;">
 
 <br/>
 <br/>
