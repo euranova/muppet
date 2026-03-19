@@ -1,6 +1,6 @@
 <div align="center">
 
-<img alt="Muppet" src="docs/assets/Muppet_logo.png" width="800px" style="max-width: 100%;">
+<img alt="Muppet" src="https://raw.githubusercontent.com/euranova/muppet/refs/heads/main/docs/assets/Muppet_logo.png" width="800px" style="max-width: 100%;">
 
 <br/>
 <br/>
@@ -8,6 +8,13 @@
 **Mu**lti**p**le **Pe**r**t**urbation e**X**plainable **A**rtificial **I**ntelligence
 
 ______________________________________________________________________
+
+<p align="center">
+    <a href="#principle">Principle</a> •
+    <a href="#quick-start">Quick Start</a> •
+    <a href="#installation">Installation</a> •
+    <a href="https://euranova.github.io/muppet/">Docs</a>
+</p>
 
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Muppet-XAI)](https://pypi.org/project/Muppet-XAI/)
 [![PyPI - Package Version](https://img.shields.io/pypi/v/Muppet-XAI)](https://pypi.org/project/Muppet-XAI/)
@@ -31,7 +38,7 @@ The perturbation-based methods follow four steps:
 4. Finally aggregate the attributions to find the final local explanation such as feature importance, heat-maps, ...
 
 <div align="center">
-<img src="images/principle.png" alt="Principle" title="Principle" width="700" />
+<img src="https://raw.githubusercontent.com/euranova/muppet/refs/heads/main/images/principle.png" alt="Principle" title="Principle" width="700" />
 </div>
 
 # Quick Start
@@ -88,7 +95,7 @@ plot_explanation_image(
 
 ## Benchmark
 
-The `Muppet` library includes a comprehensive benchmarking module located in the `muppet/benchmark/` directory. This tool is designed to evaluate and compare various Perturbation-based eXplanation (PXAI) methods across different models, datasets, and evaluation metrics, leveraging the four-block decomposition framework (Exploration, Perturbation, Attribution, Aggregation) presented in the paper.
+The `Muppet` library includes a comprehensive benchmarking module located in the [muppet/benchmark/](muppet/benchmark/) directory. This tool is designed to evaluate and compare various Perturbation-based eXplanation (PXAI) methods across different models, datasets, and evaluation metrics, leveraging the four-block decomposition framework (Exploration, Perturbation, Attribution, Aggregation) presented in the paper.
 
 ### Features
 
@@ -125,7 +132,7 @@ The `muppet/benchmark/` directory is organized as follows:
 
 ### Running Benchmarks
 
-Please refer to the dedicated documentation [benchmarking](docs/benchmarking.md) for detailed setup options.
+Please refer to the dedicated documentation [benchmarking](https://euranova.github.io/muppet/benchmarking/) for detailed setup options.
 
 ### Benchmark outputs
 
@@ -138,28 +145,28 @@ The benchmark tool typically generates:
 The figure below illustrates a heatmap comparison across various explainers run with VGG16 model for the selected image data.
 
 <div align="center">
-<img src="images/explanation_comparison.png" alt="Heatmap plot" title="Heatmap comparison across various explainers" width="700" />
+<img src="https://raw.githubusercontent.com/euranova/muppet/refs/heads/main/images/explanation_comparison.png" alt="Heatmap plot" title="Heatmap comparison across various explainers" width="700" />
 </div>
 
 Below are the performance benchmarks of various explainers evaluated on ResNet-18 over 1000 image samples.
 
 <div align="center">
-<img src="images/box_plot_benchmark.png" alt="Bar plot" title="Barplot of benchmarking across various explainers" width="700" />
+<img src="https://raw.githubusercontent.com/euranova/muppet/refs/heads/main/images/box_plot_benchmark.png" alt="Bar plot" title="Barplot of benchmarking across various explainers" width="700" />
 </div>
 
-## Installation
+# Installation
 
-### Installing MUPPET-XAI from PyPI
+## Installing MUPPET-XAI from PyPI
 
-To install Muppet-XAI with pip from [PyPI](https://pypi.org/):
+To install [Muppet-XAI](https://pypi.org/project/Muppet-XAI/) with pip from [PyPI](https://pypi.org/):
 
 ```bash
 pip install muppet-xai
 ```
 
-### Installing MUPPET-XAI for Development
+## Installing MUPPET-XAI for Development
 
-Please refer to the dedicated documentation [installation](docs/installation.md) for detailed installation options.
+Please refer to the dedicated documentation [installation](https://euranova.github.io/muppet/installation/) for detailed installation options.
 
 # Implement a new variant
 
@@ -170,19 +177,19 @@ the modeling task and what to capture from the model behavior when presented wit
 
 The presented example serves as a demonstration of how effortlessly new methods and variants can be developed in Muppet by assembling distinct but compatible modules tailored for each step in the explanation process. This flexibility not only streamlines the development process but also encourages innovation by allowing researchers to experiment with different combinations of modules to create new XAI methods.
 
-<img src="images/rise.png" alt="Violin plot" title="Distribution of Evaluation Metric Values for Each Explainer" width="700" />
-<img src="images/relax.png" alt="Violin plot" title="Distribution of Evaluation Metric Values for Each Explainer" width="700" />
+<img src="https://raw.githubusercontent.com/euranova/muppet/refs/heads/main/images/rise.png" alt="RISE explainer" title="RISE explainer implementation" width="700" />
+<img src="https://raw.githubusercontent.com/euranova/muppet/refs/heads/main/images/relax.png" alt="RELAX explainer" title="RELAX explainer implementation" width="700" />
 
 Muppet is designed for simplicity and transparency, it allows easy explanation of ML models with minimal coding. As shown in the figure below, one simply initiates the desired explainer with the model to investigate, and by providing the input data, Muppet does the rest to generate an explanation. The generated explanation's format depends on the chosen explainer (e.g., saliency map for images). Muppet components are implemented to support diverse data modalities and, therefore, could be shared among different explainers.
 
-<img src="images/call_explainer.png" alt="Violin plot" title="Distribution of Evaluation Metric Values for Each Explainer" width="700" />
+<img src="https://raw.githubusercontent.com/euranova/muppet/refs/heads/main/images/call_explainer.png" alt="Explainer call" title="Explainer call method implementation" width="700" />
 
 As an open-source project, Muppet is designed in modularity to take advantage of the theoretical decomposition of PXAI methods and provide the research community with an easy-to-contribute-to framework. It offers a standardized API to ensure that contributions are not only straightforward but also adhere to a well-defined structure. Integrating a new method into the framework involves its decomposition into the four components: Explorer, Perturbator, Attributor, and Aggregator.
 Each one represents a distinct step in the explanation process; each step corresponds to an independent module in our API, and as such can be easily swapped and re-used as building blocks for other methods.
 
 As depicted in Figure below, once the modules are implemented or selected from the library, Muppet seamlessly manages the internal communication between components to create a ready-to-use explainer. This modular approach enhances components' reusability, allowing for experimental analysis of their behavior. It also enables the instantiation of different but compatible modules to yield new PXAI methods and variants.
 
-<img src="images/explainer.png" alt="Violin plot" title="Distribution of Evaluation Metric Values for Each Explainer" width="700" />
+<img src="https://raw.githubusercontent.com/euranova/muppet/refs/heads/main/images/explainer.png" alt="Explainer init" title="Explainer init implementation" width="700" />
 
 Moreover, we acknowledge the crucial role of benchmarking capabilities of XAI methods and its demand from the research community. For this reason, Muppet offers, at the time of this writing, only some functionalities to evaluate the XAI methods such as faithfulness and robustness metrics. Muppet is currently in active development of a full benchmarking toolkit to evaluate XAI methods based on state-of-the-art models and datasets.
 
@@ -200,7 +207,7 @@ For support please write to :
 
 # Contributions
 
-Yes! We welcome all kinds of contributions. Check out our guide to contributing to [Muppet-XAI](docs/dev_documentation.md).
+Yes! We welcome all kinds of contributions. Check out our guide to contributing to [Muppet-XAI](https://euranova.github.io/muppet/dev_documentation/).
 
 # 📝 Citations
 If you find MUPPET-XAI useful in your research or projects, please cite our work:
